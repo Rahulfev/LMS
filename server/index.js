@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: ["http://localhost:3000", "https://lms-new-eight.vercel.app"], // Allow both local and deployed frontend
+    origin: ["http://localhost:3000", "https://lms-new-eight.vercel.app"], // Restrict to specific origin
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
     credentials: true // Allow credentials
 }));
