@@ -26,10 +26,19 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser());
 
+// CORS Configuration
+const allowedOrigins = ["http://localhost:3000", "https://lms-new-eight.vercel.app"];
+
 app.use(cors({
-    origin: ["http://localhost:3000", "https://lms-new-eight.vercel.app"], // Restrict to specific origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
-    credentials: true // Allow credentials
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true
 }));
 
 app.use(
